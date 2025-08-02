@@ -1,41 +1,18 @@
 const express = require("express");
-const connectDB = require("./Config/db");
-const colors = require("colors");
-// import express from express
+// const mongoose = require("mongoose");
 
+const colors = require("colors");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+// import express from express
+const taskRoutes = require("./Routes/TaskRoutes");
 const dotenv = require("dotenv").config();
-connectDB();
+connectDB = require("./Config/db");
 
 const app = express();
-app.get("/", (req, res) =>
-  res.json({
-    message: "welcome to whoba ogo",
-  })
-);
-app.get("/h", (req, res) =>
-  res.json({
-    message: "God is Good",
-  })
-);
-const people = [
-  {
-    id: 1,
-    age: 56,
-    city: "owerri",
-  },
-  {
-    id: 2,
-    age: 34,
-    city: "enugu",
-  },
-  {
-    id: 3,
-    age: 12,
-    city: "abia",
-  },
-];
-
-app.get("/students", (req, res) => res.json(people));
+app.use(cors());
+app.use(bodyParser.json());
+// app.use("/api/Task", taskRoutes);
 
 const port = process.env.port;
 
